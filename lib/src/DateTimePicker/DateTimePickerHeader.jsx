@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui';
 import PickerToolbar from '../_shared/PickerToolbar';
 import ToolbarButton from '../_shared/ToolbarButton';
+import * as utils from '../_shared/utils';
 import * as viewType from '../constants/date-picker-view';
 
 export const DateTimePickerHeader = (props) => {
@@ -19,14 +20,14 @@ export const DateTimePickerHeader = (props) => {
           type="subheading"
           onClick={changeOpenView(viewType.YEAR)}
           selected={openView === viewType.YEAR}
-          label={date.format('YYYY')}
+          label={utils.getYearText(date)}
         />
 
         <ToolbarButton
           type="display1"
           onClick={changeOpenView(viewType.DATE)}
           selected={openView === viewType.DATE}
-          label={date.format('MMM DD')}
+          label={utils.getDateTimePickerHeaderText(date)}
         />
       </div>
 

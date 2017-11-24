@@ -7,6 +7,7 @@ import Calendar from './Calendar';
 import YearSelection from './YearSelection';
 import PickerToolbar from '../_shared/PickerToolbar';
 import ToolbarButton from '../_shared/ToolbarButton';
+import * as utils from '../_shared/utils';
 import DomainPropTypes from '../constants/prop-types';
 
 export class DatePicker extends PureComponent {
@@ -86,14 +87,14 @@ export class DatePicker extends PureComponent {
             type="subheading"
             onClick={this.openYearSelection}
             selected={showYearSelection}
-            label={this.date.format('YYYY')}
+            label={utils.getYearText(this.date)}
           />
 
           <ToolbarButton
             type="display1"
             onClick={this.openCalendar}
             selected={!showYearSelection}
-            label={this.date.format('ddd, MMM DD')}
+            label={utils.getDatePickerHeaderText(this.date)}
           />
         </PickerToolbar>
 

@@ -39,6 +39,7 @@
   },
   "dependencies": {
     "babel-helpers": "^6.24.1",
+    "moment-jalaali": "^0.7.2",
     "moment-range": "^3.0.3"
   },
   "scripts": {

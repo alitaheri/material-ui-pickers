@@ -5,6 +5,7 @@ import classnames from 'classnames';
 import { extendMoment } from 'moment-range';
 import { withStyles } from 'material-ui';
 import DomainPropTypes from '../constants/prop-types';
+import * as utils from '../_shared/utils';
 
 const moment = extendMoment(Moment);
 
@@ -30,7 +31,7 @@ export class YearSelection extends PureComponent {
   onYearSelect = (year) => {
     const { date, onChange } = this.props;
 
-    const newDate = date.clone().set('year', year);
+    const newDate = utils.setYear(date, year);
     onChange(newDate);
   }
 
@@ -49,14 +50,14 @@ export class YearSelection extends PureComponent {
     const {
       minDate, maxDate, date, classes, disableFuture,
     } = this.props;
-    const currentYear = date.get('year');
+    const currentYear = utils.getYear(date);
 
     return (
       <div className={classes.container}>
         {
           Array.from(moment.range(minDate, maxDate).by('year'))
             .map((year) => {
-              const yearNumber = year.get('year');
+              const yearNumber = utils.getYear(year);
               const className = classnames(classes.yearItem, {
                 [classes.selectedYear]: yearNumber === currentYear,
                 [classes.disabled]: disableFuture && year.isAfter(moment()),
@@ -65,13 +66,13 @@ export class YearSelection extends PureComponent {
               return (
                 <div
                   role="button"
-                  key={year.format('YYYY')}
+                  key={utils.getYearText(year)}
                   className={className}
                   tabIndex={yearNumber}
                   onClick={() => this.onYearSelect(yearNumber)}
                   onKeyPress={() => this.onYearSelect(yearNumber)}
                 >
-                  { yearNumber }
+                  {utils.getYearText(year)}
                 </div>
               );
             })
